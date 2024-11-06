@@ -1,74 +1,85 @@
 import java.util.*;
-public class KKnights{
+
+public class KKnights {
+    static int maxKnights = 0;
+    static ArrayList<String> maxConfiguration = new ArrayList<>();
+
     public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        int n=sc.nextInt();
-        char arr[][]=new char[n][n];
-        for(int i=0;i<n;i++){
-            for(int j=0;j<n;j++){
-                arr[i][j]='.';
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        char[][] arr = new char[n][n];
+        
+        // Initialize the board with '.'
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = '.';
             }
         }
-        ArrayList<ArrayList<String>> solveNQueens=new ArrayList<>();
-        nQueens(arr,solveNQueens,0);
-        System.out.println(solveNQueens.size());
+
+        placeKnights(arr, 0, 0, 0, n);
+        
+        // Print the maximum number of knights placed
+        System.out.println("Maximum number of knights placed: " + maxKnights);
+        for (String row : maxConfiguration) {
+            System.out.println(row);
+        }
     }
-    public static void nQueens(char arr[][],ArrayList<ArrayList<String>> solveNQueens,int row){
-        int n=arr.length;
-        if(row==n){
-            ArrayList<String> ans=new ArrayList<>();
-            for(int i=0;i<n;i++){
-                String str="";
-                for(int j=0;j<n;j++){
-                    str=str+arr[i][j];
+
+    public static void placeKnights(char[][] arr, int row, int col, int placedKnights, int totalKnights) {
+        int n = arr.length;
+
+        if (placedKnights > maxKnights) {
+            maxKnights = placedKnights;
+            maxConfiguration.clear();
+            for (int i = 0; i < n; i++) {
+                StringBuilder str = new StringBuilder();
+                for (int j = 0; j < n; j++) {
+                    str.append(arr[i][j]);
                 }
-                ans.add(str);
+                maxConfiguration.add(str.toString());
             }
-            solveNQueens.add(ans);
+        }
+
+        if (row >= n) return; // Base case: end of board.
+
+        if (col >= n) {
+            placeKnights(arr, row + 1, 0, placedKnights, totalKnights); // Move to the next row.
             return;
         }
-        for(int j=0;j<n;j++){
-            if(isSafe(arr,row,j)){
-                arr[row][j]='K';
-                nQueens(arr,solveNQueens,row+1);
-                arr[row][j]='.';
-            }
+
+        // Check if it's safe to place a knight at (row, col)
+        if (isSafe(arr, row, col)) {
+            arr[row][col] = 'K';
+            placeKnights(arr, row, col + 1, placedKnights + 1, totalKnights); // Place knight and move to the next cell.
+            arr[row][col] = '.'; // Backtrack.
         }
+
+        // Move to the next cell without placing a knight
+        placeKnights(arr, row, col + 1, placedKnights, totalKnights);
     }
-    public static boolean isSafe(char arr[][],int row,int col){
-        int n=arr.length;
-        //up and right
-        int i=row-2;
-        int j=col+1;
-        if(i>=0 && j<n && arr[i][j]=='K') return false;
-        //up and left
-        i=row-2;
-        j=col-1;
-        if(i>=0 && j>=0 && arr[i][j]=='K') return false;
-        // right and up
-        i=row-1;
-        j=col+2;
-        if(i>=0 && j<n && arr[i][j]=='K') return false;
-        // right and down
-        i=row+1;
-        j=col+2;
-        if(i<n && j<n && arr[i][j]=='K') return false;
-        //left and up
-        i=row-1;
-        j=col-2;
-        if(i>=0 && j>=0 && arr[i][j]=='K') return false;
-        //left and down
-        i=row+1;
-        j=col-2;
-        if(i<n && j>=0 && arr[i][j]=='K') return false;
-        //down and right
-        i=row+2;
-        j=col+1;
-        if(i<n && j<n && arr[i][j]=='K') return false;
-        //down and left
-        i=row+2;
-        j=col-1;
-        if(j>=0 && i<n && arr[i][j]=='K') return false;
+
+    public static boolean isSafe(char[][] arr, int row, int col) {
+        int n = arr.length;
+        // Check all possible L-shaped moves of a knight
+
+        // Up and right
+        if (row - 2 >= 0 && col + 1 < n && arr[row - 2][col + 1] == 'K') return false;
+        // Up and left
+        if (row - 2 >= 0 && col - 1 >= 0 && arr[row - 2][col - 1] == 'K') return false;
+        // Right and up
+        if (row - 1 >= 0 && col + 2 < n && arr[row - 1][col + 2] == 'K') return false;
+        // Right and down
+        if (row + 1 < n && col + 2 < n && arr[row + 1][col + 2] == 'K') return false;
+        // Left and up
+        if (row - 1 >= 0 && col - 2 >= 0 && arr[row - 1][col - 2] == 'K') return false;
+        // Left and down
+        if (row + 1 < n && col - 2 >= 0 && arr[row + 1][col - 2] == 'K') return false;
+        // Down and right
+        if (row + 2 < n && col + 1 < n && arr[row + 2][col + 1] == 'K') return false;
+        // Down and left
+        if (row + 2 < n && col - 1 >= 0 && arr[row + 2][col - 1] == 'K') return false;
+
         return true;
     }
 }
+
