@@ -5,11 +5,16 @@ public class subsequences {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
-        for (int i = 0; i < str.length(); i++) {
-            for (int j = i; j < str.length(); j++) {
-                System.out.print(str.substring(i, j + 1) + " ");
-            }
-            System.out.println();
+        subseq(str,"");
+    }
+    public static void subseq(String str,String ans){
+        if(str.isEmpty()){
+            System.out.println(ans);
+            return;
         }
+        char ch=str.charAt(0);
+        String rem=str.substring(1);
+        subseq(rem,ans);
+        subseq(rem,ans+ch);
     }
 }
