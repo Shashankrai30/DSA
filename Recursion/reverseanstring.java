@@ -9,11 +9,11 @@ public class reverseanstring {
         System.out.println(ans);
     }
     public static String reverse(String str,int a){
-        if(a>=str.length()){
-            return "";
-        }
-        String ans=reverse(str,a+1);
-        char chr =str.charAt(a);
-        return ans+chr;
+       if(a==str.length()){
+           return "";
+       }
+       String ans=reverse(str,a+1);
+       char ch=str.charAt(a);
+       return ans+ch;
     }
 }
