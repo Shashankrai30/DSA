@@ -12,8 +12,6 @@ public class reverseanstring {
        if(a==str.length()){
            return "";
        }
-       String ans=reverse(str,a+1);
-       char ch=str.charAt(a);
-       return ans+ch;
+       return reverse(str,a+1)+str.charAt(a);
     }
 }
