@@ -1,4 +1,5 @@
-package Recursion;
+package DP;
+
 public class TOH {
     public static StringBuilder str=new StringBuilder();
     public static void main(String[] args) {
@@ -22,3 +23,6 @@ public class TOH {
         toh(n-1,H,S,D);
     }
 }
+
+
+
