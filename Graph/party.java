@@ -35,29 +35,29 @@ public class party {
 
         for(int i=1;i<=n;i++){
             if(parent[i]==-1){
-                bfs(graph,i);
+                dfs(graph,i,1);
             }
         }
         System.out.println(ans);
     }
-//    public static void dfs(ArrayList<ArrayList<Integer>> graph,int i,int depth){
-//
-//        ans=Math.max(ans,depth);
-//        for(int neighbour:graph.get(i)){
-//            dfs(graph,neighbour,depth+1);
-//        }
-//    }
-    public static void bfs( ArrayList<ArrayList<Integer>> graph,int i){
-        Queue<int[]> q=new LinkedList<>();
-        q.offer(new int[]{i,1});
+    public static void dfs(ArrayList<ArrayList<Integer>> graph,int i,int depth){
 
-        while(!q.isEmpty()){
-            int arr[]=q.poll();
-
-            for(int n:graph.get(arr[0])){
-                ans=Math.max(ans,arr[1]+1);
-                q.offer(new int[]{n,arr[1]+1});
-            }
+        ans=Math.max(ans,depth);
+        for(int neighbour:graph.get(i)){
+            dfs(graph,neighbour,depth+1);
         }
     }
+//    public static void bfs( ArrayList<ArrayList<Integer>> graph,int i){
+//        Queue<int[]> q=new LinkedList<>();
+//        q.offer(new int[]{i,1});
+//
+//        while(!q.isEmpty()){
+//            int arr[]=q.poll();
+//
+//            for(int n:graph.get(arr[0])){
+//                ans=Math.max(ans,arr[1]+1);
+//                q.offer(new int[]{n,arr[1]+1});
+//            }
+//        }
+//    }
 }
