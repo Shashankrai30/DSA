@@ -1,4 +1,4 @@
-//package Graph;
+package Graph;
 //import java.util.*;
 //public class ShortestPath1 {
 //    public static class pair{
@@ -122,3 +122,53 @@ public class ShortestPath1 {
         System.out.println(sb);
     }
 }
+//public class ShortestPath1 {
+//    public static class pair{
+//        int node;
+//        long distance;
+//        public pair(int node,long dist){
+//            this.node=node;
+//            this.distance=dist;
+//        }
+//    }
+//    public static void main(String[] args) {
+//        Scanner sc=new Scanner(System.in);
+//
+//        int V=sc.nextInt();
+//        int E=sc.nextInt();
+//
+//        long dist[]=new long[V+1];
+//        Arrays.fill(dist,Long.MAX_VALUE);
+//        dist[1]=0;
+//        ArrayList<ArrayList<pair>> list=new ArrayList<>();
+//
+//        for(int i=0;i<V+1;i++){
+//            list.add(new ArrayList<>());
+//        }
+//        for(int i=0;i<E;i++){
+//            int u= sc.nextInt();
+//            int v= sc.nextInt();
+//            long d=sc.nextLong();
+//            list.get(u).add(new pair(v,d));
+//        }
+//        PriorityQueue<pair> pq=new PriorityQueue<>((a,b)->Long.compare(a.distance, b.distance));
+//        pq.offer(new pair(1,0));
+//
+//        while(!pq.isEmpty()){
+//            pair p=pq.poll();
+//            int node=p.node;
+//
+//            for(pair curr:list.get(node)){
+//                int n= curr.node;
+//                long d= curr.distance;
+//                if(dist[n]>dist[node]+d){
+//                    dist[n]=dist[node]+d;
+//                    pq.offer(new pair(n,dist[n]));
+//                }
+//            }
+//        }
+//        for(int i=1;i<V+1;i++){
+//            System.out.print(dist[i]+" ");
+//        }
+//    }
+//}
